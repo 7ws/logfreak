@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     # Third-party apps
 
     # Local apps
+    'backend.base',
 ]
 
 
