@@ -22,6 +22,7 @@ INSTALLED_APPS = [
 
     # Local apps
     'backend.base',
+    'backend.sms_logger',
 ]
 
 
