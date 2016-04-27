@@ -5,3 +5,6 @@ __pycache__/
 # Environment-specific files
 /.env
 /db.sqlite3
+
+# Cache stuff
+.cache/
