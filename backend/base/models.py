@@ -1,3 +1,4 @@
+from django.core.validators import RegexValidator
 from django.db import models
 
 
@@ -60,6 +61,9 @@ class ContactPhone(BaseModel):
     )
     msisdn = models.CharField(
         max_length=15,  # Max MSISDN length recommended by ITU-T - E.164
+        validators=[
+            RegexValidator(r'^\d+$'),  # Only digits are accepted
+        ],
     )
     label = models.CharField(
         blank=True,
