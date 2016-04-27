@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.core.validators import RegexValidator
 from django.db import models
 
@@ -7,6 +8,14 @@ class BaseModel(models.Model):
     """An abstract model that provides basic functionality
     """
 
+    # Owner
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        editable=False,
+        related_name='%(app_label)s_%(class)s_set',
+    )
+
+    # Timestamps
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
