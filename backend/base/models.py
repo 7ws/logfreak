@@ -48,3 +48,24 @@ class Contact(BaseModel):
     name = models.CharField(
         max_length=100,
     )
+
+
+class ContactPhone(BaseModel):
+
+    """Representation of the phone number of a contact
+    """
+
+    contact = models.ForeignKey(
+        'base.Contact',
+    )
+    msisdn = models.CharField(
+        max_length=15,  # Max MSISDN length recommended by ITU-T - E.164
+    )
+    label = models.CharField(
+        blank=True,
+        max_length=20,
+        null=True,
+    )
+
+    class Meta:
+        unique_together = ('contact', 'msisdn',)
