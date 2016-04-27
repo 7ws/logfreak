@@ -1,0 +1,11 @@
+# Our favorite web framework
+Django==1.9.5
+
+# Read sensitive settings from the environment
+python-decouple==3.0
+
+# Ease path/files operations
+Unipath==1.1
+
+# 12fator-like database URL parser
+dj-database-url==0.4.0

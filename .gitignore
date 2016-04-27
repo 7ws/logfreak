@@ -1,0 +1,7 @@
+# Python cache/byte-compiled files
+*.pyc
+__pycache__/
+
+# Environment-specific files
+/.env
+/db.sqlite3
