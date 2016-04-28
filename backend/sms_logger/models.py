@@ -37,3 +37,7 @@ class SMSEntry(LogEntry):
         verbose_name=_('date and time'),
         help_text=_('Date and time the SMS was sent/received.'),
     )
+
+    class Meta:
+        verbose_name = _('SMS message')
+        verbose_name_plural = _('SMS messages')
