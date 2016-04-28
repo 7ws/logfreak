@@ -41,3 +41,10 @@ class SMSEntry(LogEntry):
     class Meta:
         verbose_name = _('SMS message')
         verbose_name_plural = _('SMS messages')
+
+    def __str__(self):
+        return 'SMS {preposition} {contact}'.format(
+            preposition=(
+                'from' if self.type == SMSEntry.TYPE_INCOMING else 'to'),
+            contact=self.contact,
+        )
