@@ -48,3 +48,9 @@ class SMSEntry(LogEntry):
                 'from' if self.type == SMSEntry.TYPE_INCOMING else 'to'),
             contact=self.contact,
         )
+
+    def save(self, *args, **kwargs):
+        # Set the contact to the phone number owner
+        self.contact = self.contact_phone.contact
+
+        super(SMSEntry, self).save(*args, **kwargs)
