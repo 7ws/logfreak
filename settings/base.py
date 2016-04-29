@@ -11,6 +11,8 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 # Active apps
 INSTALLED_APPS = [
+    'backend.webview',  # Put at first to override some Django built-ins
+
     # Django built-in apps
     'django.contrib.admin',
     'django.contrib.auth',
@@ -25,7 +27,6 @@ INSTALLED_APPS = [
     # Local apps
     'backend.base',
     'backend.sms_logger',
-    'backend.webview',
 ]
 
 

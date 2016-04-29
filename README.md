@@ -83,6 +83,9 @@ well known Django's `runserver`:
 
 	(my_env)$ ./manage.py runserver
 
+> **Note** that this project customizes the built-in `runserver` command to
+> automatically run common pre-routines like `bower install`.
+
 And that's it. Of course, for a production environment, you'll want to use a
 different stack of software and/or infrastructure to serve your application.
 Check out the [Django documentation][4] for details and be careful.
