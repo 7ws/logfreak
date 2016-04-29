@@ -23,7 +23,7 @@ STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 # Static files finding engines
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'pipeline.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
     'pipeline.finders.PipelineFinder',
 ]
 
@@ -47,6 +47,12 @@ PIPELINE = {
             'output_filename': '_compiled/js/3rd-party.js'
         }
     },
+
+    # Compilers
+    'COMPILERS': [
+        'pipeline.compilers.sass.SASSCompiler',
+    ],
+    'SASS_BINARY': '/usr/bin/env sassc',
 
     # Compressors
     'CSS_COMPRESSOR': 'pipeline.compressors.cssmin.CSSMinCompressor',
