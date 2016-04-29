@@ -1,5 +1,5 @@
 Backend package
 ===============
 
-This contains all the back-end related applications, including their templates
-and static files.
+This contains all the back-end related applications. Front-end code and assets
+are located in the [`/static` directory](/static) only.

@@ -93,6 +93,26 @@ All the current tests are written in a very simple manner thanks to
 > **Note** that the arguments `-vs` are meant to make the tests output more
 > verbose and let any text come into the stdout normally.
 
+
+### Design notes
+
+There are some important design decisions made to better organize this project.
+Some of them bypass default Django recommended structure, but greatly improve
+the modularization of all applications on this specific project. The main point
+is to take advantage of the core features from Django while having our own
+structure, pure-Python like.
+
+1. **Apps are not independent**. While following the _Don't Repeat Yourself_
+   principle heavily, the "one big app" is split into several core apps
+   (`backend.*`). This breaks the default Django design recommendation, but
+   gives us an advantage on organization of code and assets.
+2. **Front-end is separated from the core apps**. While the core apps
+   (`backend.*`) will provide us base functionality, front-end code related to
+   web views live in the [`/static` directory](/static). The `backend.webview`
+   app will rely on it, leaving Django's `AppDirectoriesFinder` useless. Note
+   that it can't be disabled in order to keep support for 3rd-party apps.
+
+
 ### Misc
 
 Oh and I need coffee to continue writing this. And money to buy me coffee.
