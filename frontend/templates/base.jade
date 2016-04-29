@@ -12,6 +12,13 @@ html
 	body
 	- block whole_body
 
+		//- User messages
+		- block messages
+			- if messages
+				ul.messages
+					- for message in messages
+						li(class='{{ message.tags }}')= message
+
 		//- Page content
 		- block content
 			p Empty page.
