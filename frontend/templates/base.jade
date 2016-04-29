@@ -1,0 +1,21 @@
+!!! 5
+html
+	head
+		title
+			= view.page_title
+			|  - Log Freak
+
+		//- Styles
+		- block styles
+			// CSS links
+
+	body
+	- block whole_body
+
+		//- Page content
+		- block content
+			p Empty page.
+
+		//- Scripts
+		- block scripts
+			// Scripts go here

@@ -13,3 +13,6 @@ dj-database-url==0.4.0
 # Allow tests to be fun
 pytest==2.9.1
 pytest-django==2.9.1
+
+# Allow to use .jade templates
+pyjade==4.0.0
