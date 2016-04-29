@@ -1,0 +1,18 @@
+- extends 'base.jade'
+
+
+- block content
+
+	h1 Log in
+
+	form(method='post')
+		- csrf_token
+
+		{{ form.non_field_errors }}
+
+		div.fields
+			- for field in form
+				- include '_widgets/form_field.jade'
+
+		div.submit_line
+			button(type='submit') Log in

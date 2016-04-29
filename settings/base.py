@@ -1,5 +1,6 @@
 from decouple import config
 from dj_database_url import parse as db_url
+from django.core.urlresolvers import reverse_lazy as r
 from unipath import Path
 
 
@@ -65,3 +66,8 @@ TIME_ZONE = config('TIME_ZONE', default='America/Sao_Paulo')
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
+
+
+# Authentication URLs
+LOGIN_URL = r('auth:login')
+LOGIN_REDIRECT_URL = r('home')

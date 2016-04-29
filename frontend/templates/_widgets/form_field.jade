@@ -1,0 +1,6 @@
+label
+	strong= field.label
+	{{ field }}
+
+	- if field.errors
+		span.error= field.errors.0
