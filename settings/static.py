@@ -8,8 +8,50 @@ STATIC_URL = config('STATIC_URL', default='/static/')
 
 # Directories to find static files
 STATICFILES_DIRS = [
-    BASE_DIR.child('frontend'),
+    BASE_DIR.child('frontend', 'static'),
 ]
+
+# Directories to save media and compiled static files
+MEDIA_ROOT = BASE_DIR.child('.public', 'media')
+STATIC_ROOT = BASE_DIR.child('.public', 'static')
+
+# Static files storage engine
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+
+
+# Static files finding engines
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'pipeline.finders.PipelineFinder',
+]
+
+
+# Static files groups
+PIPELINE = {
+    # Style files
+    'STYLESHEETS': {
+        '3rd-party': {
+            'source_filenames': [
+            ],
+            'output_filename': '_compiled/css/3rd-party.css'
+        }
+    },
+
+    # JavaScript files
+    'JAVASCRIPT': {
+        '3rd-party': {
+            'source_filenames': [
+            ],
+            'output_filename': '_compiled/js/3rd-party.js'
+        }
+    },
+
+    # Compressors
+    'CSS_COMPRESSOR': 'pipeline.compressors.cssmin.CSSMinCompressor',
+    'JS_COMPRESSOR': 'pipeline.compressors.jsmin.JSMinCompressor',
+}
+
 
 # Template finders and processors
 TEMPLATES = [

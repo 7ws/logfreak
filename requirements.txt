@@ -16,3 +16,10 @@ pytest-django==2.9.1
 
 # Allow to use .jade templates
 pyjade==4.0.0
+
+# Static files manager
+django-pipeline==1.6.8
+
+# Static files compressors
+jsmin==2.2.1
+cssmin==0.2.0

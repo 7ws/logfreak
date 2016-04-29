@@ -1,3 +1,6 @@
+- load pipeline
+
+
 !!! 5
 html
 	head
@@ -7,7 +10,7 @@ html
 
 		//- Styles
 		- block styles
-			// CSS links
+			- stylesheet '3rd-party'
 
 	body
 	- block whole_body
@@ -25,4 +28,4 @@ html
 
 		//- Scripts
 		- block scripts
-			// Scripts go here
+			- javascript '3rd-party'

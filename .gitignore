@@ -8,3 +8,6 @@ __pycache__/
 
 # Cache stuff
 .cache/
+
+# Compiled static files
+/.public/
