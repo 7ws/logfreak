@@ -1,7 +1,5 @@
 from django.contrib import admin
 
-from .models import Contact, ContactPhone
-
 
 class BaseModelAdmin(admin.ModelAdmin):
 
@@ -27,7 +25,3 @@ class ContactAdmin(BaseModelAdmin):
 class ContactPhoneAdmin(BaseModelAdmin):
 
     list_display = ('msisdn', 'contact',)
-
-
-admin.site.register(Contact, ContactAdmin)
-admin.site.register(ContactPhone, ContactPhoneAdmin)
