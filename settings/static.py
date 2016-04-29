@@ -9,6 +9,7 @@ STATIC_URL = config('STATIC_URL', default='/static/')
 # Directories to find static files
 STATICFILES_DIRS = [
     BASE_DIR.child('frontend', 'static'),
+    BASE_DIR.child('frontend', 'bower_components'),
 ]
 
 # Directories to save media and compiled static files
@@ -21,8 +22,8 @@ STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
 # Static files finding engines
 STATICFILES_FINDERS = [
-    'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'pipeline.finders.FileSystemFinder',
     'pipeline.finders.PipelineFinder',
 ]
 

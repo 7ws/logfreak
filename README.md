@@ -70,6 +70,11 @@ script:
 > repository from the mainstream. This will keep any local dependencies up to
 > date and run occasional required migration tasks.
 
+This projects uses [bower][7] for managing third-party static files libraries.
+Please make sure you have an up-to-date version of it installed and available
+in your `$PATH`:
+
+	$ bower --version
 
 ### Running
 
@@ -131,3 +136,4 @@ This software is available under the GNU GPLv3 license. Please see the
 [4]: https://docs.djangoproject.com/es/1.9/howto/deployment/
 [5]: http://pytest.org/latest/
 [6]: http://www.gnu.org/licenses/gpl.txt
+[7]: http://bower.io/

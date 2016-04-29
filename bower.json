@@ -1,0 +1,13 @@
+{
+  "name": "logfreak-frontend",
+  "authors": [
+    "Evandro Myller <eMyller@7ws.co>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "GPLv3",
+  "homepage": "",
+  "private": true,
+  "dependencies": {
+  }
+}

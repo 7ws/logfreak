@@ -9,5 +9,8 @@ __pycache__/
 # Cache stuff
 .cache/
 
-# Compiled static files
+# Media and compiled static files
 /.public/
+
+# 3rd-party assets
+/frontend/bower_components/
