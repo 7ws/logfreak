@@ -1,0 +1,19 @@
+@import 'animation';
+@import 'variables';
+
+
+%button {
+	@extend %general-animation;
+
+	background: $color-main;
+	border-radius: 2px;
+	border: none;
+	color: white;
+	cursor: pointer;
+	padding: 1rem;
+	text-transform: uppercase;
+
+	&:hover, &:focus {
+		background-color: lighten($color-main, 5);
+	}
+}

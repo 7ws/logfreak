@@ -1,0 +1,12 @@
+@import 'variables';
+
+
+%text-input {
+	background: white;
+	border-radius: 2px;
+	border: none;
+	color: $color-fg;
+	margin: 0;
+	outline: none;
+	padding: 1rem;
+}

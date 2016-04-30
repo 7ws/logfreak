@@ -9,5 +9,7 @@
   "homepage": "",
   "private": true,
   "dependencies": {
+    "canonical.css": "^1.1.1",
+    "flex-grid-framework": "^1.3.0"
   }
 }

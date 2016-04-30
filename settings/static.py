@@ -32,8 +32,16 @@ STATICFILES_FINDERS = [
 PIPELINE = {
     # Style files
     'STYLESHEETS': {
+        'main': {
+            'source_filenames': [
+                'styles/*.scss',
+                'styles/auth/*.scss',
+            ],
+            'output_filename': '_compiled/css/main.css',
+        },
         '3rd-party': {
             'source_filenames': [
+                'canonical.css/canonical.scss',
             ],
             'output_filename': '_compiled/css/3rd-party.css'
         }
@@ -43,6 +51,8 @@ PIPELINE = {
     'JAVASCRIPT': {
         '3rd-party': {
             'source_filenames': [
+                'jquery/dist/jquery.js',
+                'Materialize/dist/js/materialize.js',
             ],
             'output_filename': '_compiled/js/3rd-party.js'
         }

@@ -1,0 +1,8 @@
+@import '../../flex-grid-framework/flex-grid-framework';
+
+
+form#auth_login {
+	@extend %col-6;
+	@extend %offset-3;
+	@extend %vertical-align-middle;
+}

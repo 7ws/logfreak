@@ -1,0 +1,28 @@
+@import '../flex-grid-framework/flex-grid-framework';
+
+@import '_lib/button';
+@import '_lib/input';
+
+
+// Field groups
+label {
+	@extend %col-flex;
+	display: block;
+	margin: 1rem 0;
+
+	strong {
+		display: block;
+		font-weight: normal;
+	}
+
+	input, textarea {
+		@extend %text-input;
+		width: 100%;
+	}
+}
+
+
+// Buttons
+button[type="submit"] {
+	@extend %button;
+}

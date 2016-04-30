@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Lora:400,700,400italic');
+@import url('https://fonts.googleapis.com/css?family=Alegreya+Sans:400,700');
+@import '../flex-grid-framework/flex-grid-framework';
+
+@import '_lib/variables';
+
+
+:root {
+	background: $color-bg;
+}
+
+
+body {
+	@extend %row;
+	font: 1rem 'Alegreya Sans', sans-serif;
+}
