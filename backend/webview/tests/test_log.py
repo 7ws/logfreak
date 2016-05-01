@@ -46,19 +46,13 @@ class TestUserLogEntryCreate:
     """Tests for backend.webview.views.log.UserLogEntryCreate
     """
 
-    def test_request_with_no_type_should_raise_bad_request(self, admin_client):
-        """The view is rendering a 400-Bad Request when no _type in GET
-        """
-        url = r('log:create_entry')
-        resp = admin_client.get(url)
-        assert resp.status_code == 400
-
     def test_view_retrieves_right_form_class_from_sms_input(self, admin_user):
-        """Check if `SMSEntryForm` is selected when view receives SMS input
+        """Check if `SMSEntryForm` is selected when view receives kwarg
         """
-        get_data = {'_type': 'sms'}
-        request = mock.Mock(GET=get_data, user=admin_user)
-        view = log_views.UserLogEntryCreate(request=request)
+        view = log_views.UserLogEntryCreate(
+            request=mock.Mock(user=admin_user),
+            kwargs={'type': 'sms'},
+        )
         form_class = view.get_form_class()
         assert form_class == log_forms.SMSEntryForm
 
@@ -77,7 +71,7 @@ class TestUserLogEntryCreate:
         )
 
         # Post data to URL
-        url = r('log:create_entry') + '?_type=sms'
+        url = r('log:create_entry', kwargs={'type': 'sms'})
         post_data = {
             'contact_phone': contact_phone.pk,
             'datetime': '2000-01-01 00:00:00',

@@ -51,16 +51,9 @@ class UserLogEntryCreate(LoginRequiredMixin, generic.CreateView):
         'sms': forms.log.SMSEntryForm,
     }
 
-    def dispatch(self, req, *args, **kwargs):
-        # Return a 400-Bad Request if no type was passed
-        if req.GET.get('_type') not in self._form_class_map:
-            return HttpResponseBadRequest()
-        return super(UserLogEntryCreate, self).dispatch(req, *args, **kwargs)
-
     def get_form_class(self):
         # Retrieve form class according to requested type
-        type_ = self.request.GET['_type']
-        return self._form_class_map[type_]
+        return self._form_class_map[self.kwargs['type']]
 
     def form_valid(self, form):
         # Assign the user to the newly created log entry
