@@ -9,6 +9,13 @@ class TestLoginView:
     These tests exist because the built-in Django view is actually wrapped.
     """
 
+    def test_requesting_the_view_wont_crash(self, admin_client):
+        """Check if the view is accessible
+        """
+        url = r('auth:login')
+        resp = admin_client.get(url)
+        assert resp.status_code == 200
+
     def test_brings_view_variable_to_template_context(self, client):
         """The `view` variable is available to the template context
         """
