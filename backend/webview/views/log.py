@@ -11,7 +11,7 @@ class UserLogEntriesView(LoginRequiredMixin, generic.ListView):
     """
 
     page_title = _('My log')
-    template_name = 'log_entries/log_list.jade'
+    template_name = 'log/log_list.jade'
 
     def get_queryset(self):
         return LogEntry.objects.filter(user=self.request.user)
