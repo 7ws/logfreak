@@ -1,7 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse as r
-from django.http import HttpResponseBadRequest
 from django.utils.translation import ugettext as _
 from django.views import generic
 
