@@ -2,6 +2,7 @@ from django.conf import settings
 from django.core import validators
 from django.db import models
 from django.utils.translation import ugettext as _
+from polymorphic.models import PolymorphicModel
 
 
 class BaseModel(models.Model):
@@ -31,7 +32,7 @@ class BaseModel(models.Model):
         abstract = True
 
 
-class LogEntry(BaseModel):
+class LogEntry(PolymorphicModel, BaseModel):
 
     """Representation of a log entry
 

@@ -23,6 +23,7 @@ INSTALLED_APPS = [
 
     # Third-party apps
     'pipeline',
+    'polymorphic',
 
     # Local apps
     'backend.base',
