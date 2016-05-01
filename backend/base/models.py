@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.core.validators import RegexValidator
+from django.core import validators
 from django.db import models
 from django.utils.translation import ugettext as _
 
@@ -95,7 +95,8 @@ class ContactPhone(BaseModel):
         help_text=_('The phone number, including country code. Digits only.'),
         max_length=15,  # Max MSISDN length recommended by ITU-T - E.164
         validators=[
-            RegexValidator(r'^\d+$'),  # Only digits are accepted
+            validators.MinLengthValidator(9),
+            validators.RegexValidator(r'^\d+$'),  # Only digits are accepted
         ],
         verbose_name=_('MSISDN (number)'),
     )
