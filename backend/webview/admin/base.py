@@ -19,7 +19,7 @@ class BaseModelAdmin(admin.ModelAdmin):
 
 class ContactAdmin(BaseModelAdmin):
 
-    list_display = ('name', 'type', 'created',)
+    list_display = ('name', '_type', 'created',)
 
 
 class ContactPhoneAdmin(BaseModelAdmin):
