@@ -1,3 +1,5 @@
+import sys
+
 from decouple import config
 
 from .base import BASE_DIR, DEBUG
@@ -57,6 +59,9 @@ PIPELINE = {
     # Compressors
     'CSS_COMPRESSOR': 'pipeline.compressors.cssmin.CSSMinCompressor',
     'JS_COMPRESSOR': 'pipeline.compressors.jsmin.JSMinCompressor',
+
+    # Disable entirely when testing
+    'PIPELINE_ENABLED': 'test' not in str(sys.argv),
 }
 
 
