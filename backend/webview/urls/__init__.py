@@ -7,4 +7,5 @@ urlpatterns = [
 
     # Main views
     url(r'', include('backend.webview.urls.main')),
+    url(r'', include('backend.webview.urls.log_entries')),
 ]
