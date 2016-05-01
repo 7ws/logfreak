@@ -6,7 +6,7 @@ from unipath import Path
 
 # Basic (self-explanatory) definitions
 BASE_DIR = Path(__file__).ancestor(2)
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = config('DEBUG', default=True, cast=bool)
 
 
 # Active apps
