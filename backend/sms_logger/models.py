@@ -9,6 +9,8 @@ class SMSEntry(LogEntry):
     """Representation of a SMS log entry
     """
 
+    _entry_type = 'sms'
+
     TYPE_INCOMING = 'i'
     TYPE_OUTCOMING = 'o'
 

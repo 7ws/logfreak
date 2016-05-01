@@ -1,0 +1,20 @@
+- extends 'base.jade'
+
+
+- block content
+
+	h1= view.page_title
+
+	form(
+			method='POST', data-type='{{ form.model_type }}',
+			action="{% url 'log:create_entry' %}?_type={{ form.model_type }}",)
+		- csrf_token
+
+		{{ form.non_field_errors }}
+
+		div.fields
+			- for field in form
+				- include '_widgets/form_field.jade'
+
+		div.submit_line
+			button(type='submit') Add new {{ form.model_verbose_name }}
