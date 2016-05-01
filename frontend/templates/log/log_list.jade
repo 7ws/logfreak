@@ -11,17 +11,5 @@
 
 	section.log-add
 		- for form in creation_forms
-			form(
-					method='POST', data-type='{{ form.model_type }}',
-					action="{% url 'log:create_entry' type=form.model_type %}",)
-				- csrf_token
-
-				{{ form.non_field_errors }}
-
-				div.fields
-					- for field in form
-						- include '_widgets/form_field.jade'
-
-				div.submit_line
-					button(type='submit') Add new {{ form.model_verbose_name }}
+			- include '_widgets/log_entry_form.jade'
 
