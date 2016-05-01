@@ -56,7 +56,7 @@ class Contact(BaseModel):
     TYPE_PERSON = 'p'
     TYPE_THING = 't'
 
-    type = models.CharField(
+    _type = models.CharField(
         choices=[
             (TYPE_PERSON, 'Person'),
             (TYPE_THING, 'Thing'),
