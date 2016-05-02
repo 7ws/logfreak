@@ -1,4 +1,4 @@
-from functools import partial
+from functools import lru_cache, partial
 from urllib.parse import urljoin
 
 from django.conf import settings
@@ -18,11 +18,16 @@ class TwitterSource(Source):
     _name = 'twitter'
 
     @classmethod
-    def authorize(cls, request):
-        OAuthHandler = partial(
+    def get_auth_class(cls):
+        return partial(
             tweepy.OAuthHandler,
             settings.TWITTER_CONSUMER_KEY,
-            settings.TWITTER_CONSUMER_SECRET)
+            settings.TWITTER_CONSUMER_SECRET,
+        )
+
+    @classmethod
+    def authorize(cls, request):
+        OAuthHandler = cls.get_auth_class()
 
         # First step of OAuth dance: get token verifier
         if 'oauth_verifier' not in request.GET:
@@ -45,6 +50,44 @@ class TwitterSource(Source):
                 access_token_secret=auth.access_token_secret,
             )
             return r('sources:list')
+
+    @property
+    @lru_cache()
+    def api(self):
+        """Authorize API access with saved tokens
+        """
+        OAuthHandler = self.get_auth_class()
+        auth = OAuthHandler()
+        auth.set_access_token(self.access_token, self.access_token_secret)
+        return tweepy.API(auth)
+
+    def get_new_statuses(self):
+        """Download new user statuses from Twitter
+        """
+        try:
+            latest = TwitterLogEntry.objects\
+                .filter(source=self, _type=TwitterLogEntry.TYPE_TWEET)\
+                .latest('datetime')
+        except LogEntry.DoesNotExist:
+            cursor = tweepy.Cursor(self.api.user_timeline)
+        else:
+            since_id = latest.external_id
+            cursor = tweepy.Cursor(self.api.user_timeline, since_id=since_id)
+
+        yield from cursor.items()
+
+    def get_new_data(self):
+        """Looks up on Twitter for new user data
+        """
+        for status in self.get_new_statuses():
+            TwitterLogEntry.objects.create(
+                _type=TwitterLogEntry.TYPE_TWEET,
+                datetime=status.created_at,
+                external_id=status.id,
+                source=self,
+                text=status.text,
+                user=self.user,
+            )
 
     class Meta:
         verbose_name = _('Twitter')
