@@ -46,6 +46,11 @@ class UserSourcePreCreateView(LoginRequiredMixin, generic.TemplateView):
 class UserSourceCreateView(LoginRequiredMixin, generic.RedirectView):
 
     """Let users connect to a log source
+
+    Each log source adapter (logger) will provide an `authorize` method which
+    must perform the connection steps while returning an URL to redirect to,
+    either to an external authorizarion procedure (e.g. OAuth) or, finally, an
+    URL within this application.
     """
 
     @lru_cache(maxsize=None)
