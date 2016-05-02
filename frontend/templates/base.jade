@@ -15,6 +15,11 @@ html
 	body
 	- block whole_body
 
+		header
+			- block header
+				section.auth-menu
+					- include '_widgets/auth-menu.jade'
+
 		//- User messages
 		- block messages
 			- if messages
