@@ -52,7 +52,7 @@ class Source(PolymorphicModel, BaseModel):
     """A configured source for retrieving log entries
     """
 
-    # OAuth 2.0 fields
+    # OAuth fields
     access_token = models.TextField(
         editable=False,
         null=True,  # Not every source needs it

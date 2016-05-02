@@ -29,3 +29,6 @@ cssmin==0.2.0
 
 # When querying for parent models, retrieve their children
 django-polymorphic==0.9.1
+
+# Support for Twitter
+tweepy==3.5.0

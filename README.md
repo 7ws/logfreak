@@ -76,6 +76,18 @@ in your `$PATH`:
 
 	$ bower --version
 
+As for connecting to third-party API services, the following configuration keys
+are available:
+
+- `TWITTER_CONSUMER_TOKEN`: The consumer token provided by Twitter.
+- `TWITTER_CONSUMER_TOKEN`: The consumer secret provided by Twitter.
+
+> **Note** that none of the above is required in order to quick-start the
+> project, but obviously not every third-party related module will work. It is
+> important to check [`settings/security.py`](.settings/security.py) for
+> details on each service.
+
+
 ### Running
 
 From now on you should be able to run a development server locally using the
