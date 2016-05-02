@@ -65,9 +65,10 @@ class TwitterSource(Source):
         """Download new user statuses from Twitter
         """
         try:
-            latest = TwitterLogEntry.objects\
-                .filter(source=self, _type=TwitterLogEntry.TYPE_TWEET)\
-                .latest('datetime')
+            latest = TwitterLogEntry.objects.filter(
+                _type=TwitterLogEntry.TYPE_TWEET,
+                source=self,
+            ).latest('datetime')
         except LogEntry.DoesNotExist:
             cursor = tweepy.Cursor(self.api.user_timeline)
         else:
