@@ -3,6 +3,9 @@ from django.contrib import admin
 
 
 urlpatterns = [
+    # Django-RQ management
+    url(r'^admin/rq/', include('django_rq.urls')),
+
     # Admin UI
     url(r'^admin/', admin.site.urls),
 

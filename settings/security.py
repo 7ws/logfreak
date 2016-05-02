@@ -30,3 +30,10 @@ AUTH_PASSWORD_VALIDATORS = [
             'NumericPasswordValidator'),
     },
 ]
+
+
+# Oauth parameters for the Twitter API
+# Required access level: "Read, write, and direct messages"
+# See https://dev.twitter.com/oauth/overview/application-owner-access-tokens
+TWITTER_CONSUMER_KEY = config('TWITTER_CONSUMER_KEY', default='')
+TWITTER_CONSUMER_SECRET = config('TWITTER_CONSUMER_SECRET', default='')

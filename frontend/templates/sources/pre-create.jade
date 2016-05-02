@@ -1,0 +1,13 @@
+- extends 'base.jade'
+
+
+- block content
+
+	h1= view.page_title
+
+	p Choose the source you want to connect to.
+
+	ul
+		- for label, url in creation_links
+			li
+				a(href='{{ url }}')= label

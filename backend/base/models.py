@@ -45,6 +45,12 @@ class LogEntry(PolymorphicModel, BaseModel):
         null=True,
         verbose_name=_('related contact'),
     )
+    source = models.ForeignKey(
+        'base.Source',
+        editable=False,
+        null=True,
+        verbose_name=_('related source'),
+    )
 
 
 class Source(PolymorphicModel, BaseModel):
@@ -52,7 +58,7 @@ class Source(PolymorphicModel, BaseModel):
     """A configured source for retrieving log entries
     """
 
-    # OAuth 2.0 fields
+    # OAuth fields
     access_token = models.TextField(
         editable=False,
         null=True,  # Not every source needs it
