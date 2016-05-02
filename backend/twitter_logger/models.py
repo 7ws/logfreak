@@ -72,6 +72,9 @@ class TwitterLogEntry(LogEntry):
         ],
         max_length=1,
     )
+    external_id = models.BigIntegerField(
+        verbose_name=_('Object ID on Twitter'),
+    )
     text = models.TextField(
         help_text=_('Full text context. Usually 140 characters tops.'),
         verbose_name=_('text'),
