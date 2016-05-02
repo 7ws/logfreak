@@ -14,7 +14,7 @@ class SMSEntry(LogEntry):
     TYPE_INCOMING = 'i'
     TYPE_OUTCOMING = 'o'
 
-    type = models.CharField(
+    _type = models.CharField(
         choices=[
             (TYPE_INCOMING, _('Incoming')),
             (TYPE_OUTCOMING, _('Outcoming')),
