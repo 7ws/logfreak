@@ -90,13 +90,15 @@ are available:
 
 ### Running
 
-From now on you should be able to run a development server locally using the
-well known Django's `runserver`:
+From now on you should be able to run a development server locally:
 
-	(my_env)$ ./manage.py runserver
+	(my_env)$ make dev
 
-> **Note** that this project customizes the built-in `runserver` command to
-> automatically run common pre-routines like `bower install`.
+> **Note** that this command will run a couple commands simultaneously: 1.
+> start a local Redis server with default parameters, 2. start the `rqworker`
+> command to handle parallel job queues and 3. finally, bound to capturing
+> keystrokes, our modified version of Django's `runserver`. You should not use
+> this `make` command if you intend to develop using different configurations.
 
 And that's it. Of course, for a production environment, you'll want to use a
 different stack of software and/or infrastructure to serve your application.
