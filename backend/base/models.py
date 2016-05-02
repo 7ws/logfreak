@@ -47,6 +47,22 @@ class LogEntry(PolymorphicModel, BaseModel):
     )
 
 
+class Source(PolymorphicModel, BaseModel):
+
+    """A configured source for retrieving log entries
+    """
+
+    # OAuth 2.0 fields
+    access_token = models.TextField(
+        editable=False,
+        null=True,  # Not every source needs it
+    )
+    access_token_secret = models.TextField(
+        editable=False,
+        null=True,  # Not every source needs it
+    )
+
+
 class Contact(BaseModel):
 
     """Representation of the contact related to a log entry
