@@ -1,11 +1,14 @@
 from functools import lru_cache
 
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse as r
+from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext as _
 from django.views import generic
 
 from backend.base.models import Source
+from backend.base.workers import get_new_data
 
 
 class UserSourcesListView(LoginRequiredMixin, generic.ListView):
@@ -67,3 +70,25 @@ class UserSourceCreateView(LoginRequiredMixin, generic.RedirectView):
         # Bridge the request to the provider connection
         model = self.get_model()
         return model.authorize(self.request)
+
+
+class ManualSourceSyncView(LoginRequiredMixin, generic.RedirectView):
+
+    """Allow the user to manually get data from a source
+    """
+
+    def get_object(self):
+        return get_object_or_404(
+            Source, user=self.request.user, pk=self.kwargs['pk'])
+
+    def get_redirect_url(self, pk):
+        # Enqueue `source.get_new_data`
+        get_new_data.delay(self.get_object())
+
+        # Message the user
+        messages.success(self.request, _(
+            'Synchronization will happen soon. Stay tuned!'
+        ))
+
+        # Get back to sources list
+        return r('sources:list')

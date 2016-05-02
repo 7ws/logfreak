@@ -8,7 +8,9 @@
 	section.source-list
 		ul
 			- for source in object_list
-				li= source
+				li.source
+					{{ source }}
+					a(href="{% url 'sources:sync' pk=source.pk %}") Sync
 
 	section.add-source
 		p

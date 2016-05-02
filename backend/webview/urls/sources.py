@@ -27,4 +27,11 @@ urlpatterns = [
         sources.UserSourceCreateView.as_view(),
         name='create_for',
     ),
+
+    # Manual source sync
+    url(
+        r'sync/(?P<pk>\d+)$',
+        sources.ManualSourceSyncView.as_view(),
+        name='sync',
+    ),
 ]
