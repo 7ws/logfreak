@@ -1,3 +1,4 @@
+from functools import partial
 from urllib.parse import urljoin
 
 from django.conf import settings
@@ -18,24 +19,24 @@ class TwitterSource(Source):
 
     @classmethod
     def authorize(cls, request):
+        OAuthHandler = partial(
+            tweepy.OAuthHandler,
+            settings.TWITTER_CONSUMER_KEY,
+            settings.TWITTER_CONSUMER_SECRET)
+
         # First step of OAuth dance: get token verifier
         if 'oauth_verifier' not in request.GET:
             callback_url = urljoin(
                 request.build_absolute_uri(),
                 r('sources:create_for', kwargs={'name': 'twitter'}))
-            auth = tweepy.OAuthHandler(
-                settings.TWITTER_CONSUMER_KEY,
-                settings.TWITTER_CONSUMER_SECRET,
-                callback_url)
+            auth = OAuthHandler(callback_url)
             url = auth.get_authorization_url()
             request.session['twitter_request_token'] = auth.request_token
             return url  # Twitter authorization URL
 
         # Second step of OAuth dance: exchange request token for access token
         else:
-            auth = tweepy.OAuthHandler(
-                settings.TWITTER_CONSUMER_KEY,
-                settings.TWITTER_CONSUMER_SECRET)
+            auth = OAuthHandler()
             auth.request_token = request.session.pop('twitter_request_token')
             auth.get_access_token(request.GET['oauth_verifier'])
             cls.objects.create(
