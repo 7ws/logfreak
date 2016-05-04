@@ -8,17 +8,15 @@ understanding of how things are turning out.
 
 ## Current support:
 
-_Oh come back again in a few days! It's all an intense work in progress right
-now._
+- SMS (partial)
+- Twitter (partial)
 
 
 ## Planned support:
 
-- SMS
 - Call logs (including audio)
 - E-mails
 - Events from Google Calendar
-- Posts from Twitter
 - Activity on Facebook
 - Activity on Google Plus
 - Pictures taken at Google Photos
