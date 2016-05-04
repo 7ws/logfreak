@@ -27,6 +27,9 @@ html
 					- for message in messages
 						li(class='{{ message.tags }}')= message
 
+		- block page_title
+			h1.page-title= view.page_title
+
 		//- Page content
 		- block content
 			p Empty page.
