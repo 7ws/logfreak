@@ -29,7 +29,7 @@ class TestLoginView:
             r('auth:login'),
             data={'username': 'admin', 'password': 'password'},
             follow=True)
-        assert resp.redirect_chain == [(r('home'), 302)]
+        assert resp.redirect_chain == [(r('home'), 302), (r('log:log'), 302)]
 
     def test_validates_login_form(self, client, admin_user):
         """Check the built-in authentication form validation against database
