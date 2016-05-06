@@ -1,5 +1,5 @@
 # Our favorite web framework
-Django==1.9.5
+Django==1.9.6
 
 # Read sensitive settings from the environment
 python-decouple==3.0
