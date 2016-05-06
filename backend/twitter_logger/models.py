@@ -77,9 +77,46 @@ class TwitterSource(Source):
 
         yield from cursor.items()
 
+    def get_new_incoming_direct_messages(self):
+        """Download new incoming direct messages from Twitter
+        """
+        get_cursor = partial(
+            tweepy.Cursor, self.api.direct_messages, full_text=True)
+        try:
+            latest = TwitterLogEntry.objects.filter(
+                _type=TwitterLogEntry.TYPE_INCOMING_DIRECT_MESSAGE,
+                source=self,
+            ).latest('datetime')
+        except LogEntry.DoesNotExist:
+            cursor = get_cursor()
+        else:
+            since_id = latest.external_id
+            cursor = get_cursor(since_id=since_id)
+
+        yield from cursor.items()
+
+    def get_new_outgoing_direct_messages(self):
+        """Download new incoming direct messages from Twitter
+        """
+        get_cursor = partial(
+            tweepy.Cursor, self.api.sent_direct_messages, full_text=True)
+        try:
+            latest = TwitterLogEntry.objects.filter(
+                _type=TwitterLogEntry.TYPE_OUTGOING_DIRECT_MESSAGE,
+                source=self,
+            ).latest('datetime')
+        except LogEntry.DoesNotExist:
+            cursor = get_cursor()
+        else:
+            since_id = latest.external_id
+            cursor = get_cursor(since_id=since_id)
+
+        yield from cursor.items()
+
     def get_new_data(self):
         """Looks up on Twitter for new user data
         """
+        # Retrieve new statuses
         for status in self.get_new_statuses():
             TwitterLogEntry.objects.create(
                 _type=TwitterLogEntry.TYPE_TWEET,
@@ -87,6 +124,28 @@ class TwitterSource(Source):
                 external_id=status.id,
                 source=self,
                 text=status.text,
+                user=self.user,
+            )
+
+        # Retrieve new incoming direct messages
+        for dm in self.get_new_incoming_direct_messages():
+            TwitterLogEntry.objects.create(
+                _type=TwitterLogEntry.TYPE_INCOMING_DIRECT_MESSAGE,
+                datetime=dm.created_at,
+                external_id=dm.id,
+                source=self,
+                text=dm.text,
+                user=self.user,
+            )
+
+        # Retrieve new outgoing direct messages
+        for dm in self.get_new_outgoing_direct_messages():
+            TwitterLogEntry.objects.create(
+                _type=TwitterLogEntry.TYPE_OUTGOING_DIRECT_MESSAGE,
+                datetime=dm.created_at,
+                external_id=dm.id,
+                source=self,
+                text=dm.text,
                 user=self.user,
             )
 
@@ -104,7 +163,7 @@ class TwitterLogEntry(LogEntry):
 
     TYPE_TWEET = 't'
     TYPE_INCOMING_DIRECT_MESSAGE = 'i'
-    TYPE_OUTCOMING_DIRECT_MESSAGE = 'o'
+    TYPE_OUTGOING_DIRECT_MESSAGE = 'o'
 
     _type = models.CharField(
         choices=[
@@ -112,7 +171,7 @@ class TwitterLogEntry(LogEntry):
 
             # TODO: Add support
             (TYPE_INCOMING_DIRECT_MESSAGE, _('Incoming Direct Message')),
-            (TYPE_OUTCOMING_DIRECT_MESSAGE, _('Outcoming Direct Message')),
+            (TYPE_OUTGOING_DIRECT_MESSAGE, _('Outgoing Direct Message')),
         ],
         max_length=1,
     )
