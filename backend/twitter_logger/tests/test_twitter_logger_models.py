@@ -9,7 +9,7 @@ from backend.twitter_logger.models import TwitterLogEntry, TwitterSource
 
 @pytest.fixture
 def twitter_source(admin_user):
-    """Create an test-able `TwitterSource` object
+    """Create a test-able `TwitterSource` object
     """
     return TwitterSource.objects.create(
         user=admin_user,
