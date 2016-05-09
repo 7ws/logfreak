@@ -46,6 +46,8 @@ variables. Or just writing them to a `.env` file. The available options are:
 - `DEBUG`: Debug mode. Defaults to `'True'`.
 - `LANGUAGE_CODE`: The language code to get the application translated to.
   Defaults to `'en-us'`. Mind the language availability.
+- `REDIS_URL`: The URL to your Redis database in a [special format][2]. It's
+  used to queue asynchronous tasks. Defaults to `'redis://localhost:6379/0'`.
 - `SECRET_KEY`: A long, powerful and unique random mix of weird chars. It will
   be used to salt password hashes and other security-wise stuff. Please don't
   share it anywhere!
